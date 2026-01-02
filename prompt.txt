@@ -1,0 +1,30 @@
+Code completion task:
+
+Complete the given partial Systemverilog RTL code based on the specification ./docs/Specification.md. The RTL code should be synthesizable.
+
+PRBS generation:
+
+The PRBS generator implements a linear feedback shift register (LFSR) to produce pseudo-random binary sequences. The generator produces an 8-bit parallel output on each clock cycle when enabled. The default PRBS type is PRBS7. The prbs_type input signal is used to select between different PRBS types ranging from PRBS7 to PRBS31. When enable is HIGH, the generator continuously produces pseudo-random sequences starting from the initial seed value (prbs_seed[7:0]). The output should remain stable between clock edges to allow proper sampling by the downstream serializer module.
+
+PRBS polynomial formulas:
+- PRBS7: x^7 + x^6 + 1
+- PRBS9: x^9 + x^5 + 1
+- PRBS15: x^15 + x^14 + 1
+- PRBS31: x^31 + x^28 + 1
+
+Partial RTL code
+```
+`timescale 1ns/1ps
+module prbs_generator (input clock,//Positive edge-triggered clock
+                       input reset_n,//Asynchronous active low reset
+			           input enable, //When HIGH, prbs generation starts and when low prbs generation stops
+                       input prbs_type, //Selects between the type of PRBS, default PRBS7
+			           input [7:0]prbs_seed, //Seed for PRBS
+			           output reg [7:0]prbs_out, // PRBS output
+			           );
+	//Insert internal signal declarations
+	
+	//Instantiate the PRBS generation module based on the prbs_type and prbs_seed
+	
+endmodule
+```
