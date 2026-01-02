@@ -17,15 +17,9 @@ In order to understand the PRBS generator operation, the following parameters ar
 6. Load seed (load)
 7. Parallel output (prbs_out[7:0])
 
-The PRBS generator produces an 8-bit parallel output on each clock cycle of the PRBS clock domain. The generator implements a linear feedback shift register (LFSR) based on polynomial selection. First the seed will be loaded by toggling the load from LOW to HIGH, then, when enabled, the generator continuously produces pseudo-random sequences starting from the initial seed value. 
+The PRBS generator produces an 8-bit parallel output on each clock cycle of the PRBS clock domain. The generator implements a linear feedback shift register (LFSR) based on polynomial selection. First the seed will be loaded by toggling the load from LOW to High, then, when enabled, the generator continuously produces pseudo-random sequences starting from the initial seed value. MSB of the PRBS is mapped to the MSB of the output.
 
-On each clock cycle when enable is HIGH, the generator produces 8 bits by:
-1. Reading the MSB of the LFSR (the tap bit for the selected PRBS type)
-2. Shifting the LFSR and computing the feedback bit based on the PRBS polynomial
-3. Repeating this process 8 times to generate 8 output bits
-4. The MSB of the generated 8-bit pattern corresponds to the first bit read, and the LSB corresponds to the eighth bit read
-
-The first output after loading the seed is the first 8-bit PRBS pattern generated from that seed value, not simply the MSB 8 bits of the seed itself. Each subsequent output is the next 8-bit pattern in the PRBS sequence.
+Eg: Incase of PRBS7: the first ouput will be prbs_out = prbs_seed[6:0], prbs_seed[6] xor prbs_seed[6]
 
 ### Interface with Serializer
 
